@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Fitness Express OZ</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+
+		<!-- jQueryMobileCSS - original without styling -->
+		<link rel="stylesheet" href="css/jquerymobile.css" />
+
+		<!-- nativeDroid core CSS -->
+		<link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+		<!-- nativeDroid: Light/Dark -->
+		<link rel="stylesheet" href="css/jquerymobile.nativedroid.dark.css"  id='jQMnDTheme' />
+
+		<!-- nativeDroid: Color Schemes -->
+		<link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+
+		<!--custom css-->
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/media-query.css" />
+
+		<!-- jQuery / jQueryMobile Scripts -->
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="js/jquery.mobile-1.3.1.min.js"></script>
+        
+        <script src="js/cordova.js"></script>
+		<script src="js/functions.js"></script>
+        
+        <script type="text/javascript">
+        
+		$(document).on("pagecreate","#register-page",function(){
+
+			hideMessgae();
+			$("input.notDisplay").hide();
+			var getaddress_url = serviceURL + "medicals/display/";
+            var info = {
+             'data' : '',
+             'callback' : 'callbackresult'
+            };
+            getAjaxData(getaddress_url, info, 'callbackresult');
+            $('input[value="others"]').click(function(event){
+            	$("input.notDisplay").toggle();
+            });
+
+			$( "#submitForRegistration" ).click(function(event) {
+			event.preventDefault();
+			submitForm("#register");
+			});
+		 	allowAccess(); 
+			setUserToken();
+			 
+			
+		});
+
+		function callbackRegister(data) {
+			if(data.success == true) {
+				setLoginState(data);
+				location.replace('dashboard.html');
+			}
+			else if(data.success == false) {
+				showMessage(data);
+			}
+		}
+		function callbackresult(data) {
+//alert(data.data.data[1].Medical.name);
+				console.log(data.data);
+				var item = data.data.data;
+				var len = item.length;
+                var txt = "";
+                if(len > 0){
+                    for(var i=0;i<len;i++){
+                    	var val = item[i].Medical;
+                        txt += '<input  class="medical_list_display" type="checkbox" name="data[MedicalsUser]['+i+'][medical_id]" value="'+val.id+'" />'+val.name;
+                    }
+                    if(txt != ""){
+                        $("#resultDiv").html(txt);
+                    }
+                }
+
+}
+
+		</script>
+        
+     
+
+	</head>
+	<body>
+
+		<div data-role="page" id="register-page" data-theme='b'>
+         <div id="page_wrapper">
+
+			<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+				<a href="#">
+					<img src="image/logo.png" alt="logo" />
+				</a>
+				<h1>Fitness Express OZ</h1>
+			</div>
+			<div data-role="content">
+			<div id="pageTitle"><i class="icon-edit"></i> User Registration Form</div>
+				<div class="my-profile-bg content-position">
+					
+					<div id="result"></div>
+					<div style="clear:both"></div>
+					<form id="register" method="post" action="#">
+
+						<div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-user'></i>
+							</div>
+							<input class="custom-text" type="text" placeholder="First Name" name="data[Profile][first_name]" data-role="none">
+						</div>
+                        <div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-user'></i>
+							</div>
+							<input class="custom-text" type="text" placeholder="Last Name" name="data[Profile][last_name]" data-role="none">
+						</div>
+                        <div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-user'></i>
+							</div>
+							<input class="custom-text" type="text" placeholder="Username/Email" name="data[User][username]" data-role="none">
+						</div>
+						<div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-key'></i>
+							</div>
+							<input class="custom-text" type="password" placeholder="Password" name="data[User][password]" data-role="none">
+						</div>
+                        <div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-user'></i>
+							</div>
+                            <input type="radio" name="data[Profile][gender]" value="male" data-role="none">Male<br/>
+							<input type="radio" name="data[Profile][gender]" value="female" data-role="none">Female
+						</div>
+                         <div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-user'></i>
+							</div>
+							<input class="custom-text" type="text" placeholder="Date of Birth" name="data[Profile][birth_date]" data-role="none">
+						</div>
+                        <div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-user'></i>
+							</div>
+							<input class="custom-text" type="text" placeholder="Address" name="data[Profile][address1]" data-role="none">
+						</div>
+                        <div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-user'></i>
+							</div>
+							<input class="custom-text" type="text" placeholder="Telephone No" name="data[Profile][phone]" data-role="none">
+						</div>
+                        <div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-user'></i>
+							</div>
+							<input class="custom-text" type="text" placeholder="Mobile No" name="data[Profile][mobile]" data-role="none">
+						</div>
+						<div class='input-container'>
+							<p>Anything We Need to Know</p>
+						</div>
+						<div class='input-container'>
+							<div id="resultDiv">
+							</div>
+						</div>
+						<div class='input-container'>
+						<input type="checkbox" name="Others" value="others" data-role="none" >Others
+                        <input class="notDisplay" type="text" name="data[MedicalsUser][100][description]" value="" data-role="none" />
+                        </div>
+                        
+						<input type="hidden" name="controller" value="Users"  />
+                        <input type="hidden" name="action" value="register"  />	
+                        <input type="hidden" name="callback" value="callbackRegister" />
+
+						<div class='input-container'>
+							<button type="submit" id="submitForRegistration" class="login-width" data-role="none">
+								Register
+							</button>
+						</div>
+                        
+					</form>
+					
+					<a class="regis" href="index.html" data-ajax="false" data-role="none">Or, Already a member, Login here</a>
+					
+				</div>
+
+				<div style="clear:both"></div>
+			</div>
+			<div data-role="footer" data-id="foo1">
+				<div class="social-i" align="middle">
+					<a href="https://www.facebook.com/FitExpressOz"><i class='icon-facebook'></i></a>
+					<a href="http://instagram.com/fitnessexpress_oz"><i class='icon-instagram'></i></a>
+					<a href="mailto:info@fitnessexpressoz.com" target="_top"><i class='icon-envelope-alt'></i></a>
+				</div>
+				<div class="" align="middle">
+					Ph: 1300 00 9777
+				</div>
+			</div><!-- /footer -->
+
+		</div>
+        </div>
+
+	</body>
+</html>
