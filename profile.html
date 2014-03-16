@@ -21,11 +21,11 @@
 
 		<!--custom css-->
 		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/media-query.css" />
+		<!-- <link rel="stylesheet" href="css/media-query.css" /> -->
 
 		<!-- jQuery / jQueryMobile Scripts -->
-		<script src="js/jquery-1.9.1.min.js"></script>
-		<script src="js/jquery.mobile-1.3.1.min.js"></script>
+		<script src="js/jquery-1.10.2.min.js"></script>
+  		<script src="js/jquery.mobile-1.4.2.min.js"></script>
         
         <script src="js/cordova.js"></script>
 		<script src="js/functions.js"></script>
@@ -35,7 +35,12 @@
         $(document).on("pagecreate","#profile-page",function(){
              
          allowAccess();
-		
+          var userId = User.id;
+        //alert(userId);
+		$("input.notDisplay").hide();
+		$('input[value="others"]').click(function(event){
+            	$("input.notDisplay").toggle();
+            });
         var getaddress_url = serviceURL + "profiles/display/";
             var info = {
              'data' : '',
@@ -44,6 +49,15 @@
             getAjaxData(getaddress_url, info, 'callbackresult');
         
         });
+
+        var getaddress_url1 = serviceURL + "users/display/";
+            var info1 = {
+             'data' : '',
+             'callback' : 'callbackresult1'
+            };
+            getAjaxData(getaddress_url1, info1, 'callbackresult1');
+
+        
 
 		function callbackUpdateprofile(data) {
 			if(data.success == true) {
@@ -79,6 +93,40 @@
 
 		 });
 		}
+
+		function callbackresult1(data) {
+//alert(data.data.data[1].Medical.name);
+				console.log(data.data);
+				var item = data.data.data;
+
+				var len = item.length;
+                var txt = "";
+                if(len > 0){
+                    for(var i=0;i<len;i++){
+                    	
+                    	if(item[i].MedicalsUser){
+                    		if(item[i].MedicalsUser.medical_id){
+                    		var val1 = item[i].MedicalsUser.medical_id; 
+                    		}
+                    		else{
+	                    	var val2 = item[i].MedicalsUser.description;    	
+	                    	}
+                    	}
+                    	else{
+                    		var val = item[i].Medical;
+
+                    	txt += '<input  class="medical_list_display" type="checkbox" name="data[MedicalsUser]['+i+'][medical_id]" value="'+val.id+'" />'+val.name+'<br/>';
+                    	}
+                    	
+                        
+                        //$('input[value="3121"]').prop("checked",true)
+                    }
+                    if(txt != ""){
+                        $("#resultDiv").html(txt);
+                    }
+                }
+
+}
         
         </script>
 
@@ -104,12 +152,19 @@
            			<a href="dashboard.html" data-role="none" rel="external">Go Back</a>
            		</div>	
 				<div class="my-profile-bg content-position">
-					
-					<div id="result"></div>
-					<div style="clear:both"></div>
-					<form id="profile" method="post" action=""  onsubmit="return submitForm(this)">
+				<div style="clear:both"></div>
+				<form id="profile" method="post" action=""  onsubmit="return submitForm(this)">
 
-						<div class='input-container'>
+					<div data-role="tabs">
+				      <div data-role="navbar">
+				        <ul>
+				          <li><a href="#fragment-1">Profile Info</a></li>
+				          <li><a href="#fragment-2">Medical Info</a></li>
+				        </ul>
+				      </div>
+				      <div id="result"></div>
+				      <div id="fragment-1">
+				        <div class='input-container'>
 							<div class="icon-ph">
 								<i class='icon-user'></i>
 							</div>
@@ -125,8 +180,11 @@
 							<div class="icon-ph">
 								<i class='icon-user'></i>
 							</div>
-                            <input type="radio" name="data[Profile][gender]" value="male" data-role="none">Male<br/>
-							<input type="radio" name="data[Profile][gender]" value="female" data-role="none">Female
+							<select name="data[Profile][gender]" id="genderChoose" data-role="none">
+								<option value="male">Male</option>
+	   							<option value="female">Female</option>
+   							</select>
+                          
 						</div>
                          <div class='input-container'>
 							<div class="icon-ph">
@@ -164,6 +222,12 @@
 							</div>
 							<input class="custom-text" type="text" placeholder="City" name="data[Profile][city]" data-role="none">
 						</div>
+						<div class='input-container'>
+							<div class="icon-ph">
+								<i class='icon-user'></i>
+							</div>
+							<input class="custom-text" type="text" placeholder="Post Code" name="data[Profile][postcode]" data-role="none">
+						</div>
                         <div class='input-container'>
 							<div class="icon-ph">
 								<i class='icon-user'></i>
@@ -174,14 +238,23 @@
 							<div class="icon-ph">
 								<i class='icon-user'></i>
 							</div>
-							<input class="custom-text" type="text" placeholder="Post Code" name="data[Profile][postcode]" data-role="none">
-						</div>
-                        <div class='input-container'>
-							<div class="icon-ph">
-								<i class='icon-user'></i>
-							</div>
 							<input class="custom-text" type="text" placeholder="Country" name="data[Profile][country]" data-role="none">
 						</div>
+				      </div>
+				      <div id="fragment-2">
+					        
+							<p>Anything We Need to Know</p>
+						
+						<div class='input-container'>
+							<div id="resultDiv">
+							</div>
+						</div>
+						<div class='input-container'>
+						<input type="checkbox" name="Others" value="others" data-role="none" >Others
+                        <input class="notDisplay" type="text" name="data[MedicalsUser][100][description]" value="" data-role="none" />
+                        </div>
+					      </div>
+				    </div>		
 
 						<input type="hidden" name="controller" value="Profiles"  />
                         <input type="hidden" name="action" value="updateprofile"  />	
@@ -200,7 +273,7 @@
        
 				<div style="clear:both"></div>
 			</div>
-			<div data-role="footer" data-id="foo1">
+			<div data-role="footer" data-position="fixed" data-id="foo1">
 				<div class="social-i" align="middle">
 					<a href="https://www.facebook.com/FitExpressOz"><i class='icon-facebook'></i></a>
 					<a href="http://instagram.com/fitnessexpress_oz"><i class='icon-instagram'></i></a>

@@ -1,17 +1,36 @@
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body::-webkit-scrollbar {
+  height: 0px;
+  width: 0px;
+}
+body {
+  -webkit-touch-callout: none;
+  /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;
+  /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;
+}
 html,body{
 	height:100% !important;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
-	background-color: #213540;
+	
 	color: #fff;
 	font-size: 100%;
 	
 }
+.ui-page-theme-b{background-color: #213540 !important;}
 #page_wrapper {
 	min-width: 19.75em;
 	max-width: 33em;
 	margin: .125em auto;
 	padding: 0em;
-	border: .125em solid #666666;
+	/*border: .125em solid #666666;*/
 }
 
 header {
@@ -181,10 +200,11 @@ cursor: pointer;
     width: auto;
     height: auto;
     min-width: 2em;
-	padding: 0.812em 0.625em;
+    padding: 12px 5px;
+	/*padding: 0.812em 0.625em;*/
 /*    font-size: 1.875em;*/
     font-weight: normal;
-    line-height: 26px;
+    /*line-height: 26px;*/
     text-align: center;
     text-shadow: 0 .0625em 0 #ffffff;
     background-color: #000;
@@ -363,7 +383,7 @@ cursor: pointer;
     height: 40px;
     margin-bottom: 10px;
     padding-left: 60px;
-    width: 87%;
+    width: 100%;
 }
 .input-container button[type=submit], .input-container select,.input-container input[type=button]{
 	width:100%; 
@@ -603,7 +623,7 @@ cursor: pointer;
 .submitFormAssessment:hover{ background-color: #cf3c43;}
 
 /*medical list of registration*/
-/*.medical_list_display{ width: 33%; float: left; display: inline;}*/
+#resultDiv{ font-size: 12px; font-style: italic;}
 
 .regis{ color: #FF9900; font-size: 12px;}
 
@@ -612,5 +632,25 @@ cursor: pointer;
 #goback a{ color: #FF9900;}
 
 #chart1 p{ margin-left: 25px;}
+
+.ui-footer{background-color: #000000;}
+
+/*.ui-btn-text{ font-size: 12px;}*/
+#genderChoose{ font-size: 12px; padding-left: 60px; margin-bottom: 11px; height: 41px;
+background-color: #CDEFFF;
+border: 1px solid #57bae8;
+color: #000;
+font-style: italic;
+} 
+
+/*tab styling*/
+.ui-state-active{}
+
+.ui-btn{ padding: 5px 0; background-color: #29668b; color: #fff;}
+.ui-state-active .ui-btn{ background-color: #cf3c43;}
+
+.ui-tabs .ui-block-a, .ui-tabs .ui-block-b{ padding: 0px 2px 0px 0px; margin: 5px 0 10px 0;}
+
+#fragment-2 p{ padding: 0; margin: 0 0 5px 0;}
 
 
