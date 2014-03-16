@@ -96,30 +96,49 @@
 
 		function callbackresult1(data) {
 //alert(data.data.data[1].Medical.name);
-				console.log(data.data);
+				//console.log(data.data);
 				var item = data.data.data;
 
 				var len = item.length;
+				var medical_data_id = [];
+				var medicalArray = [];
+				var medical_data_desc = "";
                 var txt = "";
-                if(len > 0){
-                    for(var i=0;i<len;i++){
+                for(var i=0;i<len;i++){
                     	
                     	if(item[i].MedicalsUser){
                     		if(item[i].MedicalsUser.medical_id){
                     		var val1 = item[i].MedicalsUser.medical_id; 
+                    		medical_data_id.push(val1);
                     		}
                     		else{
-	                    	var val2 = item[i].MedicalsUser.description;    	
+	                    	var medical_data_desc = item[i].MedicalsUser.description;    	
 	                    	}
                     	}
                     	else{
-                    		var val = item[i].Medical;
-
-                    	txt += '<input  class="medical_list_display" type="checkbox" name="data[MedicalsUser]['+i+'][medical_id]" value="'+val.id+'" />'+val.name+'<br/>';
+                    		medicalArray.push(item[i].Medical);
                     	}
+                }
+                if(medical_data_desc){
+                	$(".notDisplay").val(medical_data_desc);
+                }
+                //console.log(medicalArray);
+                if(medicalArray.length > 0){
+                    for(var i=0;i<medicalArray.length;i++){
+                    		 //for(var j=0;j<medical_data_id.length;j++){
+                    		if(jQuery.inArray( medicalArray[i].id , medical_data_id) != -1)
+                    		{
+                    		
+                    		txt += '<input  class="medical_list_display" checked="checked" type="checkbox" name="data[MedicalsUser]['+i+'][medical_id]" value="'+medicalArray[i].id+'" />'+medicalArray[i].name+'<br/>';
+
+                    		}
                     	
+                    		else{
+                    			txt += '<input  class="medical_list_display" type="checkbox" name="data[MedicalsUser]['+i+'][medical_id]" value="'+medicalArray[i].id+'" />'+medicalArray[i].name+'<br/>';
+                    		}
+                    	//}
                         
-                        //$('input[value="3121"]').prop("checked",true)
+                    
                     }
                     if(txt != ""){
                         $("#resultDiv").html(txt);
@@ -256,7 +275,7 @@
 					      </div>
 				    </div>		
 
-						<input type="hidden" name="controller" value="Profiles"  />
+						<input type="hidden" name="controller" value="users"  />
                         <input type="hidden" name="action" value="updateprofile"  />	
                         <input type="hidden" name="callback" value="callbackUpdateprofile" />
                         <input type="hidden" id="profileId" name="data[Profile][id]" value="" />
