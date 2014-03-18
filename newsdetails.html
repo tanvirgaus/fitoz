@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Fitness Express OZ</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+
+		<!-- jQueryMobileCSS - original without styling -->
+		<link rel="stylesheet" href="css/jquerymobile.css" />
+
+		<!-- nativeDroid core CSS -->
+		<link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+		<!-- nativeDroid: Light/Dark -->
+		<link rel="stylesheet" href="css/jquerymobile.nativedroid.dark.css"  id='jQMnDTheme' />
+
+		<!-- nativeDroid: Color Schemes -->
+		<link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+
+		<!--custom css-->
+		<link rel="stylesheet" href="css/style.css" />
+		<!-- <link rel="stylesheet" href="css/media-query.css" /> -->
+		<!-- jQuery / jQueryMobile Scripts -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+      <script src="js/jquery.mobile-1.4.2.min.js"></script>
+		
+    <script src="js/Chart.js"></script>
+
+    <script src="js/cordova.js"></script>
+		<script src="js/functions.js"></script>
+
+		<script class="code" type="text/javascript">
+
+      $(document).on("pagecreate","#newsdetails-page",function(){
+      	allowAccess();
+
+      	//get value from the link		
+        var news_info = window.location.search.substring(1);
+
+
+       
+        var values=news_info.split('=');
+        var news_id=values[1];
+
+        //alert(news_id);
+
+        // var assessmentMessage = '<i class="icon-eye-open"></i> '+assessment_name + ' Graph';
+
+        // $("#pageTitle").html(assessmentMessage);
+       
+
+        // var userId = User.id;
+        
+        var getaddress_url = serviceURL + "news/details/";
+                  var info = {
+                   'data' : { 'news_id' : news_id},
+                   'callback' : 'callbackresult'
+                  };
+                  getAjaxData(getaddress_url, info, 'callbackresult');
+        
+        
+      });
+    	function callbackresult(data) {
+     console.log(data.data);
+
+     var item = data.data.data.News;
+     //alert(item.title);
+    
+                var txt = "";
+                
+                txt += "<h2>"+item.title+"</h2>"+"<p>"+item.content+"</p>"+'<a href="'+item.url+'">'+item.url+'</a>';
+                 
+                    if(txt != ""){
+                        $("#news_details").html(txt);
+                    }
+              
+}
+
+</script>
+	</head>
+	<body>
+		<div data-role="page" id="newsdetails-page" data-theme='b'>
+		<div id="page_wrapper">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+				<a href="#">
+					<img src="image/logo.png" alt="logo" />
+				</a>
+				<h1>Fitness Express OZ</h1>
+			</div>
+			<div data-role="content" class="news-wrapper">		
+					<div id="pageTitle"><i class="icon-eye-open"></i> News details</div>
+           <div id="goback">
+              <i class="icon-step-backward"></i>
+              <a href="news.html" data-role="none" data-ajax="false">Go Back</a>
+           </div>
+          <div id="news_details"></div> 
+			</div>
+			<div data-role="footer" data-position="fixed" data-id="foo1">
+				<div class="social-i" align="middle">
+					<a href="https://www.facebook.com/FitExpressOz"><i class='icon-facebook'></i></a>
+					<a href="http://instagram.com/fitnessexpress_oz"><i class='icon-instagram'></i></a>
+					<a href="mailto:info@fitnessexpressoz.com" target="_top"><i class='icon-envelope-alt'></i></a>
+				</div>
+				<div class="" align="middle">
+					Ph: 1300 00 9777
+				</div>
+			</div>
+		</div>
+		</div>
+	</body>
+</html>

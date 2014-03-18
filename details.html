@@ -26,7 +26,17 @@
 		<script src="js/jquery-1.10.2.min.js"></script>
       <script src="js/jquery.mobile-1.4.2.min.js"></script>
 		
-    <script src="js/Chart.js"></script>
+    <script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+        <script type="text/javascript" src="js/jqplot.logAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/jqplot.canvasTextRenderer.min.js"></script>
+    <script type="text/javascript" src="js/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/jqplot.canvasAxisLabelRenderer.min.js"></script>
+    <script type="text/javascript" src="js/jqplot.canvasAxisTickRenderer.min.js"></script>
+        <script type="text/javascript" src="js/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="js/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="js/jqplot.cursor.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" hrf="css/jquery.jqplot.min.css" />
 
     <script src="js/cordova.js"></script>
 		<script src="js/functions.js"></script>
@@ -62,52 +72,100 @@
         
       });
     	function callbackresult(data) {
-    		
-     //console.log(data.data);
-     var graph_information = data.data.data;
-     
-     var len = data.data.data.length;
+    
+ //console.log(data.data);
+ var graph_information = data.data.data;
+ 
+ var len = data.data.data.length;
 
-     //alert(len);
-      var noRecord = "<p>"+'No record found for you!'+"</p>"
-    if(len == 0){
-    	$("#chart1").html(noRecord);
-     }
-     else{
-     
-    var tempDate = [];
-    var tempData = [];
-    var dateValue = null;
-    var assessmentValue = null;
+ //alert(len);
+  var noRecord = "<p>"+'No record found for you!'+"</p>"
+if(len == 0){
+  $("#chart1").html(noRecord);
+ }
+ else{
+ 
+var result = [];
+var dateValue = null;
+var assessmentValue = null;
+//$(".jqplot-highlighter-tooltip").css("color","black");
+var temp = null;
+  for(var i=0;i<len;i++){
+    dateValue = graph_information[i].AssessmentsUser.assessment_date;
+    assessmentValue = graph_information[i].AssessmentsUser.assessment;
+    //alert(dateValue);
 
-    var temp = null;
-      for(var i=0;i<len;i++){
-      	dateValue = graph_information[i].AssessmentsUser.assessment_date;
-      	assessmentValue = graph_information[i].AssessmentsUser.assessment;
-      	
-      	tempDate.push(dateValue);
-      	tempData.push(parseInt(assessmentValue));
+    temp = [];
 
-      }
-      console.log(tempData);
-      console.log(tempDate);
-      
-      var lineChartData = {
-          labels : tempDate,
-          datasets : [
-            {
-              fillColor : "rgba(151,187,205,0.5)",
-              strokeColor : "rgba(151,187,205,1)",
-              pointColor : "rgba(151,187,205,1)",
-              pointStrokeColor : "#fff",
-              data : tempData
-            }
-          ]
-          
+    temp.push(dateValue);
+    temp.push(parseInt(assessmentValue));
+
+    result.push(temp);
+  
+  }
+  console.log(result);
+  
+  var min_date = graph_information[0].AssessmentsUser.assessment_date;
+  function incr_date(date_str){
+  var parts = date_str.split("-");
+  var dt = new Date(
+    parseInt(parts[0], 10),      // year
+    parseInt(parts[1], 10) - 1,  // month (starts with 0)
+    parseInt(parts[2], 10)       // date
+  );
+  dt.setDate(dt.getDate() - 1);
+  parts[0] = "" + dt.getFullYear();
+  parts[1] = "" + (dt.getMonth() + 1);
+  if (parts[1].length < 2) {
+    parts[1] = "0" + parts[1];
+  }
+  parts[2] = "" + dt.getDate();
+  if (parts[2].length < 2) {
+    parts[2] = "0" + parts[2];
+  }
+  return parts.join("-");
+}
+
+var changed_date = incr_date(min_date);
+
+//alert(changed_date);
+
+  var line1=result;
+  var plot1 = $.jqplot('chart1', [line1], {
+    title:'Assessment Per Date Graph',
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+      //tickOptions:{formatString:'%b %#d, %y'},
+          min:changed_date, 
+          tickInterval:'1 day',
+          //label: 'Date of Assessment',
+          labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+          tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+          tickOptions: {
+              // labelPosition: 'middle',
+              fontSize:'10pt', 
+              textColor:'#fff',
+              angle: -45
+          },
+      pad: 1 
+        },
+    yaxis:{
+      //label:'Assessments'
         }
-    		var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
-    }
-    }
+    },
+    series:[{lineWidth:2, markerOptions:{style:'square'}}],
+  
+    highlighter: {
+        show: true,
+        sizeAdjust: 5.5
+      },
+      cursor: {
+        show: false
+      }
+  });
+}
+}
 </script>
 	</head>
 	<body>
@@ -119,14 +177,16 @@
 				</a>
 				<h1>Fitness Express OZ</h1>
 			</div>
-			<div data-role="content">		
+			<div data-role="content">
+        <div class="top-section">		
 					<div id="pageTitle"></div>
-           <div id="goback">
+          <div id="goback">
               <i class="icon-step-backward"></i>
               <a href="assessment.html" data-role="none" data-ajax="false">Go Back</a>
-           </div>
-          <div id="chart1"></div> 
-					<canvas id="canvas" height="500" width="530"></canvas>
+          </div>
+        </div>
+          <div id="assessment_name" data-role="list-divider"></div>
+          <div id="chart1" style="height:300px; width:450px; margin: 0 auto;"></div>
 			</div>
 			<div data-role="footer" data-position="fixed" data-id="foo1">
 				<div class="social-i" align="middle">
