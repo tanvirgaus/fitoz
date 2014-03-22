@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Fitness Express OZ</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- FontAwesome - http://fortawesome.github.io/Font-Awesome/ -->
+		<link rel="stylesheet" href="css/font-awesome.min.css" />
+
+		<!-- jQueryMobileCSS - original without styling -->
+		<link rel="stylesheet" href="css/jquerymobile.css" />
+
+		<!-- nativeDroid core CSS -->
+		<link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+		<!-- nativeDroid: Light/Dark -->
+		<link rel="stylesheet" href="css/jquerymobile.nativedroid.dark.css"  id='jQMnDTheme' />
+
+		<!-- nativeDroid: Color Schemes -->
+		<link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+
+		<!--custom css-->
+		<link rel="stylesheet" href="css/style.css" />
+		<!-- <link rel="stylesheet" href="css/media-query.css" /> -->
+		<!-- jQuery / jQueryMobile Scripts -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+  		<script src="js/jquery.mobile-1.4.2.min.js"></script>
+        
+        <script src="js/cordova.js"></script>
+		<script src="js/functions.js"></script>
+        
+        
+
+	</head>
+    
+    
+	<body>
+		<script type="text/javascript">
+	
+	 	
+		 $(document).on("pagecreate","#schedule-page",function(){
+			
+			allowAccess();
+
+			var getaddress_url = serviceURL + "teams/schedulelist/";
+            var info = {
+             'data' : '',
+             'callback' : 'callbackresult'
+            };
+            getAjaxData(getaddress_url, info, 'callbackresult');
+		  
+		 });
+	
+		function callbackresult(data) {
+
+			console.log(data.data);
+
+		 var item = data.data.data;
+
+		 function whichDay(dateString) {
+    var daysOfWeek = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    return daysOfWeek[new Date(dateString).getDay()];
+	}
+		
+                var txt = "";
+                if(item.length > 0){
+                    for(var i=0;i<item.length;i++){
+                    	var val = item[i].Schedule;
+                            txt += "<tr><td>"+val.schedule_date+"</td><td>"+whichDay(val.schedule_date)+"</td><td>"+val.schedule_time+"</td><td>"+val.place+"</td></tr>";
+                       
+                    }
+                    if(txt != ""){
+                        $("#resultAdd").html(txt);
+                    }
+                }
+                else{
+                	txt += '<tr><td>'+data.message+'</td></tr>';
+                	//alert(txt);
+                	$("#resultAdd").html(txt);
+                }
+
+		 
+
+}
+ 	</script>
+		<div data-role="page" id="schedule-page" data-theme='b'>
+			<div id="page_wrapper">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+				<a href="#">
+					<img src="image/logo.png" alt="logo" />
+				</a>
+				<h1>Fitness Express OZ</h1>
+			</div>
+			
+			<div data-role="content"> 
+            
+			<div id="pageTitle"><i class="icon-eye-open"></i> Your Schedules</div>
+           	<div id="goback">
+           		<i class="icon-step-backward"></i>
+           		<a href="dashboard.html" data-role="none" data-ajax="false">Go Back</a>
+           	</div>
+			
+			<table cellpadding="0" cellspacing="0" class="schedule-table">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Weekday</th>
+						<th>Time</th>
+						<th>Place</th>
+					</tr>
+				</thead>
+				<tbody id="resultAdd">
+					
+				</tbody>
+			</table>
+
+        </div>
+
+			<div data-role="footer" data-position="fixed" data-id="foo1">
+				<div class="social-i" align="middle">
+					<a href="https://www.facebook.com/FitExpressOz"><i class='icon-facebook'></i></a>
+					<a href="http://instagram.com/fitnessexpress_oz"><i class='icon-instagram'></i></a>
+					<a href="mailto:info@fitnessexpressoz.com" target="_top"><i class='icon-envelope-alt'></i></a>
+				</div>
+				<div class="" align="middle">
+					Ph: 1300 00 9777
+				</div>
+			</div><!-- /footer -->
+
+		</div>
+		</div>
+
+	</body>
+</html>
