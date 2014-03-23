@@ -24,7 +24,7 @@ html,body{
 	font-size: 100%;
 	
 }
-.ui-page-theme-b{background-color: #213540 !important;}
+.ui-page-theme-b{background-color: #000 !important;}
 #page_wrapper {
 	min-width: 19.75em;
 	max-width: 33em;
@@ -642,7 +642,7 @@ cursor: pointer;
 .ui-footer{background-color: #000000;}
 
 /*.ui-btn-text{ font-size: 12px;}*/
-#genderChoose{ font-size: 12px; padding-left: 60px; margin-bottom: 11px; height: 41px;
+#genderChoose{ font-size: 12px; padding-left: 60px !important; margin-bottom: 11px; height: 41px;
 background-color: #CDEFFF;
 border: 1px solid #57bae8;
 color: #000;
