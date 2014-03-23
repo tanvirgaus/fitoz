@@ -43,15 +43,6 @@
        
         var values=news_info.split('=');
         var news_id=values[1];
-
-        //alert(news_id);
-
-        // var assessmentMessage = '<i class="icon-eye-open"></i> '+assessment_name + ' Graph';
-
-        // $("#pageTitle").html(assessmentMessage);
-       
-
-        // var userId = User.id;
         
         var getaddress_url = serviceURL + "news/details/";
                   var info = {
@@ -75,6 +66,14 @@
                     if(txt != ""){
                         $("#news_details").html(txt);
                     }
+        if(item.type === 'news'){
+       		$("#pageTitle").html('<i class="icon-eye-open"></i> News Details');
+       		$("#goback").html('<i class="icon-step-backward"></i><a href="news.html" data-role="none" data-ajax="false"> Go Back</a>');
+   		}
+   		else{
+   			$("#pageTitle").html('<i class="icon-eye-open"></i> Tips Details');
+   			$("#goback").html('<i class="icon-step-backward"></i><a href="dashboard.html" data-role="none" data-ajax="false"> Go Back</a>');
+   		}
               
 }
 
@@ -89,11 +88,11 @@
 				</a>
 				<h1>Fitness Express OZ</h1>
 			</div>
-			<div data-role="content" class="news-wrapper">		
-					<div id="pageTitle"><i class="icon-eye-open"></i> News details</div>
+			<div data-role="content" class="news-wrapper">
+					<div id="pageTitle"><!-- <i class="icon-eye-open"></i> News details --></div>
            <div id="goback">
-              <i class="icon-step-backward"></i>
-              <a href="news.html" data-role="none" data-ajax="false">Go Back</a>
+              <!-- <i class="icon-step-backward"></i>
+              <a href="news.html" data-role="none" data-ajax="false">Go Back</a> -->
            </div>
           <div id="news_details"></div> 
 			</div>
