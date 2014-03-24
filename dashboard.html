@@ -30,7 +30,7 @@
       	<script src="js/jquery.mobile-1.4.2.min.js"></script>
 
       	<!--for tips flash-->
-      	<script src="js/jquery.ticker.js"></script>
+      	<script src="js/jquery.vticker.min.js"></script>
         
         <script src="js/cordova.js"></script>
 		<script src="js/functions.js"></script>
@@ -76,14 +76,15 @@
                 if(item.length > 0){
                     for(var i=0;i<item.length;i++){
                     	var val = item[i].News;
-                       txt += '<li class="news-item"><a href="newsdetails.html?news_id='+val.id+'" data-ajax="false">'+val.title+'</a></li>';
+                       txt += '<li>'+val.content+'</li>';
 
                     }
                     if(txt != ""){
-                        $("#js-news").html(txt);
+                        $(".newsticker").html(txt);
                     }
                 }
-                 $('#js-news').ticker();
+                 //$('#js-news').ticker();
+                $('#slidenews').vTicker();
 		}
 
  	</script>
@@ -103,7 +104,7 @@
 			</div>
 			<div data-role="none" id="content" class="ui-content">
 				<div class="user-picture" align="middle">
-					<img src="image/user.png" alt="user" />
+					<img src="image/logo-circle.png" alt="logo" />
 				</div>
 				<div class="ui-grid-b">
 					<div class="ui-block-a" align="middle">
@@ -115,11 +116,11 @@
 						</a>
 					</div>
 					<div class="ui-block-b" align="middle">
-						<a href="#">
+						<a href="assessment.html" data-ajax="false" data-transition="flip">
 						<div class="dash-item">
-							<i class='icon-tasks'></i>
+							<i class='icon-road'></i>
 						</div>
-						Task
+						Assessment
 						</a>
 					</div>
 					<div class="ui-block-c" align="middle">
@@ -131,19 +132,19 @@
 						</a>
 					</div>
 					<div class="ui-block-a" align="middle">
-						<a href="assessment.html" data-ajax="false" data-transition="flip">
-						<div class="dash-item">
-							<i class='icon-road'></i>
-						</div>
-						Assessment
-						</a>
-					</div>
-					<div class="ui-block-b" align="middle">
 						<a href="news.html" data-ajax="false" data-transition="flip">
 						<div class="dash-item">
 							<i class='icon-warning-sign'></i>
 						</div>
 						News
+						</a>
+					</div>
+					<div class="ui-block-b" align="middle">
+						<a href="#">
+						<div class="dash-item">
+							<i class='icon-tasks'></i>
+						</div>
+						Change Password
 						</a>
 					</div>
 					<div class="ui-block-c" align="middle">
@@ -156,8 +157,11 @@
 					</div>
                     
 				</div>
-				<ul id="js-news" class="js-hidden tips">
-</ul>
+				<div id="tips-title">Latest Tips:</div>
+				<div id="slidenews">
+					<ul class="newsticker">
+					</ul>
+				</div>
                 </div>
 
 				<!-- InstanceEndEditable -->

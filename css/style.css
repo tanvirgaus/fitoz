@@ -409,6 +409,8 @@ cursor: pointer;
     padding-left: 60px;
     width: 100%;
  }
+
+ .select-option{ text-align: left;}
 /*addedd*/
 .input-container button[type=submit]:hover{
 	background-color: #cf3c43;
@@ -687,3 +689,8 @@ font-style: italic;
 .schedule-table tr td{ padding: 10px; text-align: center;}
 .schedule-table tr td.full-width{ width: 100%;}
 
+
+/*newsticker style*/
+#tips-title{ color: #000; font-size: 12px; font-weight: bold; margin: 0 40px 5px;}
+#slidenews{ color: #000; font-size: 12px; margin: 0 40px; padding: 0;}
+#slidenews li{ list-style-type: none; height: 70px;}
