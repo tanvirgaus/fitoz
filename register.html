@@ -35,6 +35,9 @@
 		$(document).on("pagecreate","#register-page",function(){
 
 			hideMessgae();
+
+			$( ".footer" ).toolbar({ tapToggle: false });
+
 			$("input.notDisplay").hide();
 			var getaddress_url = serviceURL + "medicals/display/";
             var info = {
@@ -211,7 +214,7 @@
 
 				<div style="clear:both"></div>
 			</div>
-			<div data-role="footer" data-position="fixed" data-id="foo1">
+			<div data-role="footer" data-position="fixed" data-id="foo1" class="footer">
 				<div class="social-i" align="middle">
 					<a href="https://www.facebook.com/FitExpressOz"><i class='icon-facebook'></i></a>
 					<a href="http://instagram.com/fitnessexpress_oz"><i class='icon-instagram'></i></a>

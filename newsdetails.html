@@ -36,6 +36,8 @@
       $(document).on("pagecreate","#newsdetails-page",function(){
       	allowAccess();
 
+      	$( ".footer" ).toolbar({ tapToggle: false });
+
       	//get value from the link		
         var news_info = window.location.search.substring(1);
 
@@ -96,7 +98,7 @@
            </div>
           <div id="news_details"></div> 
 			</div>
-			<div data-role="footer" data-position="fixed" data-id="foo1">
+			<div data-role="footer" data-position="fixed" data-id="foo1" class="footer">
 				<div class="social-i" align="middle">
 					<a href="https://www.facebook.com/FitExpressOz"><i class='icon-facebook'></i></a>
 					<a href="http://instagram.com/fitnessexpress_oz"><i class='icon-instagram'></i></a>

@@ -42,6 +42,8 @@
 			
 			allowAccess();
 
+			$( ".footer" ).toolbar({ tapToggle: false });
+
 			var getaddress_url = serviceURL + "news/display/";
             var info = {
              'data' : '',
@@ -93,7 +95,7 @@
 	        </ul>
         </div>
 
-			<div data-role="footer" data-position="fixed" data-id="foo1">
+			<div data-role="footer" data-position="fixed" data-id="foo1" class="footer">
 				<div class="social-i" align="middle">
 					<a href="https://www.facebook.com/FitExpressOz"><i class='icon-facebook'></i></a>
 					<a href="http://instagram.com/fitnessexpress_oz"><i class='icon-instagram'></i></a>
