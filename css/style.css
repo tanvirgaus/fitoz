@@ -692,5 +692,16 @@ font-style: italic;
 
 /*newsticker style*/
 #tips-title{ color: #000; font-size: 12px; font-weight: bold; margin: 0 40px 5px;}
-#slidenews{ color: #000; font-size: 12px; margin: 0 40px; padding: 0;}
+#slidenews{ color: #000; font-size: 12px; margin: 0 40px; padding: 0; }
 #slidenews li{ list-style-type: none; height: 70px;}
+
+
+#select-4-button{ padding: 12px 0; margin: 0 0 .6em 0; 
+	background-color: #CDEFFF; color: #000; font-style: italic;}
+
+
+/*date formate styling*/
+
+#month{ width: 30%;}
+#day{ width: 23%;}
+#year{ width: 30%;}
