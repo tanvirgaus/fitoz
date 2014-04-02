@@ -702,6 +702,21 @@ font-style: italic;
 
 /*date formate styling*/
 
-#month{ width: 30%;}
-#day{ width: 23%;}
-#year{ width: 30%;}
+#month{ width: 30%; text-align: right;}
+#day{ width: 23%; text-align: right;}
+#year{ width: 30%; text-align: right;}
+#dob{ font-size: 12px; font-style: italic !important;}
+
+.dateOfBirth{ clear: both; width: 100%; float: left;}
+.dateOfBirth .ui-select{ width: 30% !important; float: left; margin-right: 1%;background-color: #CDEFFF;
+    border: 1px solid #57bae8;
+    color: #000; /*#CFC1C1*/
+    font-style: italic;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+#select-5-button, #select-6-button, #select-7-button{ background: none !important;}
+
+
+#slidenews{ background: #F8F0DB; border-radius: 5px; margin-bottom: 5px; padding: 0 5px;}
