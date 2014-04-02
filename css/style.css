@@ -702,7 +702,7 @@ font-style: italic;
 
 /*date formate styling*/
 
-#month{ width: 30%; text-align: right;}
+#month{ width: 40%; text-align: right;}
 #day{ width: 23%; text-align: right;}
 #year{ width: 30%; text-align: right;}
 #dob{ font-size: 12px; font-style: italic !important;}
