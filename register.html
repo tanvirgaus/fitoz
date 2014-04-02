@@ -70,9 +70,16 @@
 			}		
 			
 			$( ".continue" ).click(function(event) {
-			event.preventDefault();
-		    // var selected = $("#tabs").tabs("option", "selected");
-		    // $("#tabs").tabs("option", "#fragment-2");
+				$('#fragment-1').hide();
+    			$('#fragment-2').show();
+    			$('#navbar-1 ul li').each(function() {
+       				$(this).removeClass('ui-tabs-active');
+       				$(this).removeClass('ui-state-active');
+    			});
+				$('#navbar-1 ul li a').each(function() {
+       				$(this).removeClass('ui-btn-active');
+    			});	 
+    			$('#button-2').click();
 			});
 
 		 	allowAccess(); 
@@ -131,10 +138,10 @@
 					<div style="clear:both"></div>
 					<form id="register" method="post" action="#">
 						<div data-role="tabs">
-					      <div data-role="navbar">
+					      <div data-role="navbar" id="navbar-1">
 					        <ul>
-					          <li><a href="#fragment-1">Profile Info</a></li>
-					          <li><a href="#fragment-2">Medical Info</a></li>
+					          <li><a id="button-1" href="#fragment-1">Profile Info</a></li>
+					          <li><a id="button-2" href="#fragment-2">Medical Info</a></li>
 					        </ul>
 					      </div>
 
@@ -286,9 +293,9 @@
 							</div>
 							<input class="custom-text" type="text" value="NSW" name="data[Profile][state]" data-role="none">
 						</div>
-						<!-- <div class='input-container'>
+						<div class='input-container'>
 							<input type="button" class="continue" name="continue" value="Continue" data-role="none">
-						</div> -->
+						</div>
 					      </div>
 					      <div id="fragment-2">
 					        
