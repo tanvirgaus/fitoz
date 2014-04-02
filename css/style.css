@@ -720,3 +720,6 @@ font-style: italic;
 
 
 #slidenews{ background: #F8F0DB; border-radius: 5px; margin-bottom: 5px; padding: 0 5px;}
+
+/*graph styling*/
+.jqplot-title{ margin-bottom: 7px;}
