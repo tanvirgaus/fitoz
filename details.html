@@ -36,6 +36,8 @@
         <script type="text/javascript" src="js/jqplot.highlighter.min.js"></script>
         <script type="text/javascript" src="js/jqplot.cursor.min.js"></script>
 
+        <script type="text/javascript" src="js/jqplot.barRenderer.min.js"></script>
+
         <link rel="stylesheet" type="text/css" hrf="css/jquery.jqplot.min.css" />
 
     <script src="js/cordova.js"></script>
@@ -72,8 +74,22 @@
         
         
       });
+
+  
+
+
     	function callbackresult(data) {
-    
+      
+      function whichMonth(dateString) {
+        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+
+    return monthNames[new Date(dateString).getMonth()];
+
+    // var daysOfWeek = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    // return daysOfWeek[new Date(dateString).getDay()];
+  }
+
  //console.log(data.data);
  var graph_information = data.data.data;
  
@@ -89,10 +105,14 @@ if(len == 0){
 var result = [];
 var dateValue = null;
 var assessmentValue = null;
-//$(".jqplot-highlighter-tooltip").css("color","black");
+
 var temp = null;
   for(var i=0;i<len;i++){
-    dateValue = graph_information[i].AssessmentsUser.assessment_date;
+
+    var strOfDate = graph_information[i].AssessmentsUser.assessment_date;
+    var res = strOfDate.split("-");
+    dateValue = res[2]+" "+whichMonth(strOfDate);
+
     assessmentValue = graph_information[i].AssessmentsUser.assessment;
     //alert(dateValue);
 
@@ -100,71 +120,33 @@ var temp = null;
 
     temp.push(dateValue);
     temp.push(parseInt(assessmentValue));
-
+    
     result.push(temp);
   
   }
-  console.log(result);
+  //console.log(result);
   
-  var min_date = graph_information[0].AssessmentsUser.assessment_date;
-  function incr_date(date_str){
-  var parts = date_str.split("-");
-  var dt = new Date(
-    parseInt(parts[0], 10),      // year
-    parseInt(parts[1], 10) - 1,  // month (starts with 0)
-    parseInt(parts[2], 10)       // date
-  );
-  dt.setDate(dt.getDate() - 2);
-  parts[0] = "" + dt.getFullYear();
-  parts[1] = "" + (dt.getMonth() + 1);
-  if (parts[1].length < 2) {
-    parts[1] = "0" + parts[1];
-  }
-  parts[2] = "" + dt.getDate();
-  if (parts[2].length < 2) {
-    parts[2] = "0" + parts[2];
-  }
-  return parts.join("-");
-}
 
-var changed_date = incr_date(min_date);
-
-//alert(changed_date);
-
-  var line1=result;
+ var line1 = result;
+ 
   var plot1 = $.jqplot('chart1', [line1], {
-    title:'Assessment Per Date Graph',
-    axes:{
-        xaxis:{
-            renderer:$.jqplot.DateAxisRenderer,
-      //tickOptions:{formatString:'%b %#d, %y'},
-          min:changed_date, 
-          tickInterval:'3 day',
-          //label: 'Date of Assessment',
-          labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-          tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-          tickOptions: {
-              // labelPosition: 'middle',
-              fontSize:'10pt', 
-              textColor:'#fff',
-              angle: -45
-          },
-      pad: 1 
-        },
-    yaxis:{
-      //label:'Assessments'
+    title: 'Assessment Graph By Date',
+    series:[{renderer:$.jqplot.BarRenderer}],
+    axesDefaults: {
+        tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+        tickOptions: {
+          angle: -30,
+          fontSize: '10pt'
         }
     },
-    series:[{lineWidth:2, markerOptions:{style:'square'}}],
-  
-    highlighter: {
-        show: true,
-        sizeAdjust: 5.5
-      },
-      cursor: {
-        show: false
+    axes: {
+      xaxis: {
+        renderer: $.jqplot.CategoryAxisRenderer
       }
+    }
   });
+
+
 }
 }
 </script>
