@@ -73,11 +73,12 @@
 					if ( e.regid.length > 0 ){
 						currentUser = getLocalStorage("User");
 						userId = currentUser.id;
-						params = { callback : 'callbackAPPID', controller : 'Users', action : 'appid', data : [{ deviceRegId : e.regid, userId : currentUser.id }] }; 
-						
-							getAjaxData(params, 'callbackAPPID');
-							
-						
+						var getaddress_url = serviceURL + "users/appid/";
+			            var info = {
+		                   'data' : { 'deviceRegId' : e.regid, 'userId' : currentUser.id },
+		                   'callback' : 'callbackAPPID'
+		                 };
+			            getAjaxData(getaddress_url, info, 'callbackAPPID');	
 						
 					}
                     break;
@@ -109,8 +110,6 @@
 							$('#popupDialog').popup('close');
 							urlString = "profile.html";
 							window.open(urlString);
-						}else if( e.payload.message == 'Taxi Arrived'){
-							alert('Taxi Arrived');
 						}
 						
                     break;
