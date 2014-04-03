@@ -74,10 +74,10 @@
 						currentUser = getLocalStorage("User");
 						userId = currentUser.id;
 						params = { callback : 'callbackAPPID', controller : 'Users', action : 'appid', data : [{ deviceRegId : e.regid, userId : currentUser.id }] }; 
-						if(getLocalStorage("readyCount") == 0){ 
+						
 							getAjaxData(params, 'callbackAPPID');
-							setLocalStorage("readyCount", 1 );
-						}
+							
+						
 						
 					}
                     break;
