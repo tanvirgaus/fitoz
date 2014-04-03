@@ -34,12 +34,18 @@
         
         <script src="js/cordova.js"></script>
 		<script src="js/functions.js"></script>
+
+		<script src="PushNotification.js"></script>
+		
+		<script src="js/push.js"></script>
         
         <script type="text/javascript">
 
 		$(document).on("pagecreate","#dashboard-page",function(){
 			setUserToken();
 			allowAccess();
+
+			document.addEventListener('deviceready', onDeviceReady, true);
 
 			$( ".footer" ).toolbar({ tapToggle: false });
 			
