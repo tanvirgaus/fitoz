@@ -71,8 +71,10 @@
 				//alert(e.event);
                     case 'registered':
 					if ( e.regid.length > 0 ){
+
 						currentUser = getLocalStorage("User");
 						userId = currentUser.id;
+						alert(userId);
 						var getaddress_url = serviceURL + "users/appid/";
 			            var info = {
 		                   'data' : { 'deviceRegId' : e.regid, 'userId' : currentUser.id },
