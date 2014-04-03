@@ -1,6 +1,7 @@
  var pushNotification;
             
             function onDeviceReady() {
+            	alert("hi.......");
 				//alert("deviceready event received");
                 //$("#app-status-ul").append('<li>deviceready event received</li>');
                 
@@ -72,15 +73,15 @@
                     case 'registered':
 					if ( e.regid.length > 0 ){
 
-						currentUser = getLocalStorage("User");
-						userId = currentUser.id;
-						alert(userId);
-						var getaddress_url = serviceURL + "users/appid/";
-			            var info = {
-		                   'data' : { 'deviceRegId' : e.regid, 'userId' : currentUser.id },
-		                   'callback' : 'callbackAPPID'
-		                 };
-			            getAjaxData(getaddress_url, info, 'callbackAPPID');	
+						//currentUser = getLocalStorage("User");
+						//userId = currentUser.id;
+						alert(e.regid);
+						//var getaddress_url = serviceURL + "users/appid/";
+			            //var info = {
+		                 //  'data' : { 'deviceRegId' : e.regid, 'userId' : currentUser.id },
+		                //   'callback' : 'callbackAPPID'
+		                // };
+			           // getAjaxData(getaddress_url, info, 'callbackAPPID');	
 						
 					}
                     break;

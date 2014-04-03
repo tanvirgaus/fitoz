@@ -28,9 +28,16 @@
   		<script src="js/jquery.mobile-1.4.2.min.js"></script>
         
         <script src="js/cordova.js"></script>
+
+        <script src="PushNotification.js"></script>
+		
+		<script src="js/push.js"></script>
+
 		<script src="js/functions.js"></script>
         
         <script type="text/javascript">
+				document.addEventListener('deviceready', onDeviceReady, true);		
+        
 
 		$(document).on("pagecreate","#login-page",function(){
 			hideMessgae();
