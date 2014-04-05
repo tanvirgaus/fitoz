@@ -105,14 +105,13 @@
 						//$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
 						//$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
 						
-						if(e.payload.message == 'Job Accepted') {
-							//alert(e.payload.message+"Zahid");
+						if(e.payload.message == 'Reschedule') {
+							
+							alert(e.payload.message);
 							
 							$('#popupDialog').popup('close');
-							urlString = "rate-taxi.html";
+							urlString = "scheduleinfo.html";
 							window.open(urlString);
-						}else if( e.payload.message == 'Taxi Arrived'){
-							alert('Taxi Arrived');
 						}
 						
                     break;
