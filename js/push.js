@@ -73,9 +73,17 @@
 					if ( e.regid.length > 0 ){
 						currentUser = getLocalStorage("User");
 						userId = currentUser.id;
-						params = { callback : 'callbackAPPID', controller : 'Users', action : 'appid', data : [{ deviceRegId : e.regid, userId : currentUser.id }] }; 
-						
-					    getAjaxData(params, 'callbackAPPID');
+
+						alert(userId);
+
+						alert(e.regid);
+
+						var getaddress_url = serviceURL + "users/appid/";
+                  var info = {
+                   'data' : { 'deviceId' : e.regid, 'userId' : userId},
+                   'callback' : 'callbackAPPID'
+                  };
+                  getAjaxData(getaddress_url, info, 'callbackAPPID');
 							
 						
 					}
@@ -139,7 +147,8 @@
             }
 			
 			function callbackAPPID(data) {
-				if(data.success == true) {			
+				if(data.success == true) {
+				alert('Save device Id');			
 				} else {
 				}
 			}
