@@ -38,6 +38,9 @@
         <script type="text/javascript">
 
 		$(document).on("pagecreate","#login-page",function(){
+
+			document.addEventListener('deviceready', onDeviceReady, true);		
+			
 			hideMessgae();
 
 			$( ".footer" ).toolbar({ tapToggle: false });
