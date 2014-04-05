@@ -31,13 +31,14 @@
 
       	<!--for tips flash-->
       	<script src="js/jquery.vticker.min.js"></script>
-        
+
+        <script src="js/logger.js"></script>
         <script src="js/cordova.js"></script>
 		<script src="js/functions.js"></script>
-		<script src="js/logger.js"></script>
+		<script src="PushNotification.js"></script>
 		<script src="js/push.js"></script>
 
-		<script src="PushNotification.js"></script>
+		
         
         <script type="text/javascript">
 
@@ -45,11 +46,7 @@
 			setUserToken();
 			allowAccess();
 
-			var isLogin = getLocalStorage("loggedin");			
-			if(isLogin == 'yes'){
-				document.addEventListener('deviceready', onDeviceReady, true);		
-			}
-
+			
 			$( ".footer" ).toolbar({ tapToggle: false });
 			
 			var getaddress_url = serviceURL + "news/findtips/";
@@ -95,6 +92,12 @@
                  //$('#js-news').ticker();
                 $('#slidenews').vTicker();
 		}
+
+		var isLogin = getLocalStorage("loggedin");			
+			if(isLogin == 'yes'){
+				document.addEventListener('deviceready', onDeviceReady, true);		
+			}
+
 
  	</script>
 
