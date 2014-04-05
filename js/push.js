@@ -1,5 +1,5 @@
  var pushNotification;
-            alert("hi");
+            
             function onDeviceReady() {
 				alert("deviceready event received");
                 //$("#app-status-ul").append('<li>deviceready event received</li>');
@@ -71,16 +71,13 @@
 				//alert(e.event);
                     case 'registered':
 					if ( e.regid.length > 0 ){
-
 						currentUser = getLocalStorage("User");
 						userId = currentUser.id;
-						
-						var getaddress_url = serviceURL + "users/appid/";
-			            var info = {
-		                   'data' : { 'deviceRegId' : e.regid, 'userId' : currentUser.id },
-		                   'callback' : 'callbackAPPID'
-		                 };
-			            getAjaxData(getaddress_url, info, 'callbackAPPID');	
+						params = { callback : 'callbackAPPID', controller : 'Users', action : 'appid', data : [{ deviceRegId : e.regid, userId : currentUser.id }] }; 
+						if(getLocalStorage("readyCount") == 0){ 
+							getAjaxData(params, 'callbackAPPID');
+							setLocalStorage("readyCount", 1 );
+						}
 						
 					}
                     break;
@@ -106,12 +103,14 @@
 						//$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
 						//$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
 						
-						if(e.payload.message == 'Reschedule') {
+						if(e.payload.message == 'Job Accepted') {
 							//alert(e.payload.message+"Zahid");
 							
 							$('#popupDialog').popup('close');
-							urlString = "profile.html";
+							urlString = "rate-taxi.html";
 							window.open(urlString);
+						}else if( e.payload.message == 'Taxi Arrived'){
+							alert('Taxi Arrived');
 						}
 						
                     break;
