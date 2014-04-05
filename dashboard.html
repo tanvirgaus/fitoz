@@ -46,10 +46,10 @@
 			setUserToken();
 			allowAccess();
 
-			// var isLogin = getLocalStorage("loggedin");			
-			// if(isLogin == 'yes'){
-			// 	document.addEventListener('deviceready', onDeviceReady, true);		
-			// }
+			var isLogin = getLocalStorage("loggedin");			
+			if(isLogin == 'yes'){
+				document.addEventListener('deviceready', onDeviceReady, true);		
+			}
 
 			
 			$( ".footer" ).toolbar({ tapToggle: false });
@@ -166,15 +166,6 @@
 							<i class='icon-signout'></i>
 						</div>
 						Sign Out
-						</a>
-					</div>
-
-					<div class="ui-block-c" align="middle">
-						<a href="push.html" data-ajax="false">
-						<div class="dash-item">
-							<i class='icon-tasks'></i>
-						</div>
-						Push
 						</a>
 					</div>
                     
