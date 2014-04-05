@@ -143,9 +143,9 @@
 			
 			function callbackAPPID(data) {
 				if(data.success == true) {		
-				alert('saved');	
+
 				} else {
-					alert('not saved');
+					
 				}
 			}
             
