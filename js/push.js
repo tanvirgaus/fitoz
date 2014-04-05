@@ -1,7 +1,7 @@
  var pushNotification;
             
             function onDeviceReady() {
-				alert("deviceready event received");
+				//alert("deviceready event received");
                 //$("#app-status-ul").append('<li>deviceready event received</li>');
                 
 				/*document.addEventListener("backbutton", function(e)
@@ -71,16 +71,12 @@
 				//alert(e.event);
                     case 'registered':
 					if ( e.regid.length > 0 ){
-						alert(e.regid);
 						currentUser = getLocalStorage("User");
 						userId = currentUser.id;
+						params = { callback : 'callbackAPPID', controller : 'Users', action : 'appid', data : [{ deviceRegId : e.regid, userId : currentUser.id }] }; 
 						
-						var getaddress_url = serviceURL + "users/appid/";
-			            var info = {
-		                   'data' : { 'deviceRegId' : e.regid, 'userId' : currentUser.id },
-		                   'callback' : 'callbackAPPID'
-		                 };
-			            getAjaxData(getaddress_url, info, 'callbackAPPID');	
+					    getAjaxData(params, 'callbackAPPID');
+							
 						
 					}
                     break;
