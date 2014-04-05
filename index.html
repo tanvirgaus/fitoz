@@ -37,9 +37,12 @@
         
         <script type="text/javascript">
 
+        document.addEventListener('deviceready', onDeviceReady, true);
+
 		$(document).on("pagecreate","#login-page",function(){
 
-			document.addEventListener('deviceready', onDeviceReady, true);		
+
+					
 			
 			hideMessgae();
 

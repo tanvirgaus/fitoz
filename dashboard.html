@@ -46,6 +46,11 @@
 			setUserToken();
 			allowAccess();
 
+			// var isLogin = getLocalStorage("loggedin");			
+			// if(isLogin == 'yes'){
+			// 	document.addEventListener('deviceready', onDeviceReady, true);		
+			// }
+
 			
 			$( ".footer" ).toolbar({ tapToggle: false });
 			
@@ -93,11 +98,7 @@
                 $('#slidenews').vTicker();
 		}
 
-		var isLogin = getLocalStorage("loggedin");			
-			if(isLogin == 'yes'){
-				document.addEventListener('deviceready', onDeviceReady, true);		
-			}
-
+		
 
  	</script>
 
