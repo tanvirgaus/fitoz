@@ -71,7 +71,7 @@
 				//alert(e.event);
                     case 'registered':
 					if ( e.regid.length > 0 ){
-						alert(e.regid);
+						//alert(e.regid);
 						currentUser = getLocalStorage("User");
 						
 						var getaddress_url = serviceURL + "users/setdeviceid/";
