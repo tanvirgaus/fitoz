@@ -24,63 +24,99 @@
 		<!-- <link rel="stylesheet" href="css/media-query.css" /> -->
 		<!-- jQuery / jQueryMobile Scripts -->
 		<script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery.mobile-1.4.2.min.js"></script>
-	
-
-    <script src="js/cordova.js"></script>
+  		<script src="js/jquery.mobile-1.4.2.min.js"></script>
+        
+        <script src="js/cordova.js"></script>
 		<script src="js/functions.js"></script>
-
-		<script class="code" type="text/javascript">
-
-      $(document).on("pagecreate","#details-page",function(){
-      	allowAccess();
-      		
-        $( ".footer" ).toolbar({ tapToggle: false });
-        
-        var assessmentMessage = '<i class="icon-eye-open"></i> Reschedule Info';
-
-        $("#pageTitle").html(assessmentMessage);
-        
-
-     //    var userId = User.id;
-        
-     //    var getaddress_url = serviceURL + "schedules/rescheduleinfo/";
-     //              var info = {
-     //               'data' : {'userId' : userId},
-     //               'callback' : 'callbackresult'
-     //              };
-     //              getAjaxData(getaddress_url, info, 'callbackresult');
         
         
-     //  });
 
-    	// function callbackresult(data) {
-     //  console.log(data.data);
-  }
-</script>
 	</head>
+    
+    
 	<body>
-		<div data-role="page" id="details-page" data-theme='b'>
-		<div id="page_wrapper">
+		<script type="text/javascript">
+	
+	 	
+		 $(document).on("pagecreate","#schedule-page",function(){
+			
+			allowAccess();
+
+			$( ".footer" ).toolbar({ tapToggle: false });
+
+			var userName = User.username;
+			
+			var getaddress_url = serviceURL + "schedules/rescheduleinfo/";
+            var info = {
+             'data' : {'userName' : userName},
+             'callback' : 'callbackresult'
+            };
+            getAjaxData(getaddress_url, info, 'callbackresult');
+		  
+		 });
+	
+		function callbackresult(data) {
+
+		if(data.success == true){
+			console.log(data.data);
+
+		 var item = data.data.data.Schedule;
+
+		 var res1 = item.prev_date.split("-");
+    	 dateValue1 = res1[2]+" "+whichMonth(item.prev_date);
+
+    	 var res2 = item.schedule_date.split("-");
+    	 dateValue2 = res2[2]+" "+whichMonth(item.schedule_date);
+
+		 if(item.prev_date && !item.place && !item.prev_time){
+		 	$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2);
+		 }
+
+		 else if(item.prev_date && item.place && !item.prev_time){
+		 	$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2+' at '+item.place);
+		 }
+
+		 else if(item.prev_date && item.prev_time && !item.place){
+		 	$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time+'has been changed to '+dateValue2+'  '+item.schedule_time);
+		 }
+
+		 else if(item.prev_date && item.prev_time && item.place){
+		 	$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time+'has been changed to '+dateValue2+'  '+item.schedule_time+' at '+item.place);
+		 }
+		
+		}
+
+		else{
+             txt += '<tr><td>'+data.message+'</td><td></td><td></td><td></td></tr>';
+             
+             $("#resultAdd").html(txt);
+            }
+
+		}
+ 	</script>
+		<div data-role="page" id="schedule-page" data-theme='b'>
+			<div id="page_wrapper">
 			<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b'>
 				<a href="#">
 					<img src="image/logo.png" alt="logo" />
 				</a>
 				<h1>Fitness Express OZ</h1>
 			</div>
-			<div data-role="content">
-        <div class="top-section">		
-					<div id="pageTitle"></div>
-          <div id="goback">
-              <i class="icon-step-backward"></i>
-              <a href="assessment.html" data-role="none" data-ajax="false">Go Back</a>
-          </div>
-        </div>
-          <div id="assessment_name" data-role="list-divider"></div>
-          <div id="reschedule">
-            Informations....
-          </div>
+			
+			<div data-role="content"> 
+            
+			<div id="pageTitle"><i class="icon-eye-open"></i> Reschedule Notification</div>
+           	<div id="goback">
+           		<i class="icon-step-backward"></i>
+           		<a href="schedule.html" data-role="none" data-ajax="false">Go Back</a>
+           	</div>
+			
+			<div id="resultAdd">
+				
 			</div>
+
+        </div>
+
 			<div data-role="footer" data-position="fixed" data-id="foo1" class="footer">
 				<div class="social-i" align="middle">
 					<a href="https://www.facebook.com/FitExpressOz"><i class='icon-facebook'></i></a>
@@ -90,8 +126,10 @@
 				<div class="" align="middle">
 					Ph: 1300 00 9777
 				</div>
-			</div>
+			</div><!-- /footer -->
+
 		</div>
 		</div>
+
 	</body>
 </html>
