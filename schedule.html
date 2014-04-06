@@ -77,6 +77,9 @@
                     	{
                     		val.schedule_time = 'Not Changed';
                     	}
+                    	else{
+                    		val.schedule_time = val.schedule_time.substr(0, 5);
+                    	}
                     	if( val.place === '' || val.place === null){
                     		val.place = 'Not Changed';
                     	}
