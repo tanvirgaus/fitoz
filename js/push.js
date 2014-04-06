@@ -71,7 +71,7 @@
 				//alert(e.event);
                     case 'registered':
 					if ( e.regid.length > 0 ){
-						//alert(e.regid);
+						alert(e.regid);
 						currentUser = getLocalStorage("User");
 						
 						var getaddress_url = serviceURL + "users/setdeviceid/";
@@ -107,7 +107,7 @@
 						
 						if(e.payload.message == 'Reschedule') {
 							
-							alert(e.payload.message);
+							//alert(e.payload.message);
 							
 							$('#popupDialog').popup('close');
 							urlString = "scheduleinfo.html";
