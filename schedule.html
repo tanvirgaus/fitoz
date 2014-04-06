@@ -70,8 +70,11 @@
 
                     	var val = item[i].Schedule;
 
-                    	var res = val.schedule_date.split("-");
-    					dateValue = res[2]+" "+whichMonth(val.schedule_date);
+                    	var res1 = val.prev_date.split("-");
+    					dateValue1 = res1[2]+" "+whichMonth(val.schedule_date);
+
+    					var res2 = val.schedule_date.split("-");
+    					dateValue2 = res2[2]+" "+whichMonth(val.schedule_date);
 
                     	if(val.schedule_time === '' || val.schedule_time === null)
                     	{
@@ -84,7 +87,7 @@
                     		val.place = 'Not Changed';
                     	}
                         
-                        txt += "<tr><td>"+dateValue+"</td><td>"+whichDay(val.schedule_date)+"</td><td>"+val.schedule_time+"</td><td>"+val.place+"</td></tr>";
+                        txt += "<tr><td>"+dateValue2+"</td><td>"+whichDay(val.schedule_date)+"</td><td>"+val.schedule_time+"</td><td>"+val.place+"</td><td>"+dateValue1+"</td></tr>";
                     	
                        
                     }
@@ -128,6 +131,7 @@
 						<th>Weekday</th>
 						<th>Time</th>
 						<th>Place</th>
+						<th>Prev Date</th>
 					</tr>
 				</thead>
 				<tbody id="resultAdd">
