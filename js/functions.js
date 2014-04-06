@@ -433,3 +433,17 @@ function showHideLightBox(stat) {
 		}
 		$("#" + id).checkboxradio('refresh', true);
 	}
+
+// for date and day string conversion
+
+	function whichDay(dateString) {
+    var daysOfWeek = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    return daysOfWeek[new Date(dateString).getDay()];
+	}
+
+	function whichMonth(dateString) {
+        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+
+    return monthNames[new Date(dateString).getMonth()];
+  }

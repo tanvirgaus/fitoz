@@ -43,10 +43,12 @@
 			allowAccess();
 
 			$( ".footer" ).toolbar({ tapToggle: false });
+
+			var userName = User.username;
 			
-			var getaddress_url = serviceURL + "teams/schedulelist/";
+			var getaddress_url = serviceURL + "schedules/getreschedule/";
             var info = {
-             'data' : '',
+             'data' : {'userName' : userName},
              'callback' : 'callbackresult'
             };
             getAjaxData(getaddress_url, info, 'callbackresult');
@@ -55,35 +57,49 @@
 	
 		function callbackresult(data) {
 
+		if(data.success == true){
 			console.log(data.data);
 
 		 var item = data.data.data;
 
-		 function whichDay(dateString) {
-    var daysOfWeek = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-    return daysOfWeek[new Date(dateString).getDay()];
-	}
+		 
 		
                 var txt = "";
                 if(item.length > 0){
                     for(var i=0;i<item.length;i++){
+
                     	var val = item[i].Schedule;
-                            txt += "<tr><td>"+val.schedule_date+"</td><td>"+whichDay(val.schedule_date)+"</td><td>"+val.schedule_time+"</td><td>"+val.place+"</td></tr>";
+
+                    	var res = val.schedule_date.split("-");
+    					dateValue = res[2]+" "+whichMonth(val.schedule_date);
+
+                    	if(val.schedule_time === '' || val.schedule_time === null)
+                    	{
+                    		val.schedule_time = 'Not Changed';
+                    	}
+                    	if( val.place === '' || val.place === null){
+                    		val.place = 'Not Changed';
+                    	}
+                        
+                        txt += "<tr><td>"+dateValue+"</td><td>"+whichDay(val.schedule_date)+"</td><td>"+val.schedule_time+"</td><td>"+val.place+"</td></tr>";
+                    	
                        
                     }
                     if(txt != ""){
                         $("#resultAdd").html(txt);
                     }
                 }
-                else{
-                	txt += '<tr><td>'+data.message+'</td></tr>';
-                	//alert(txt);
-                	$("#resultAdd").html(txt);
-                }
+                
 
-		 
+		}
 
-}
+		else{
+             txt += '<tr><td>'+data.message+'</td><td></td><td></td><td></td></tr>';
+             
+             $("#resultAdd").html(txt);
+            }
+
+		}
  	</script>
 		<div data-role="page" id="schedule-page" data-theme='b'>
 			<div id="page_wrapper">
@@ -96,7 +112,7 @@
 			
 			<div data-role="content"> 
             
-			<div id="pageTitle"><i class="icon-eye-open"></i> Your Schedules</div>
+			<div id="pageTitle"><i class="icon-eye-open"></i> Your Reschedules List</div>
            	<div id="goback">
            		<i class="icon-step-backward"></i>
            		<a href="dashboard.html" data-role="none" data-ajax="false">Go Back</a>

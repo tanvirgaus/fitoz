@@ -684,16 +684,16 @@ font-style: italic;
 
 /*schedule listing*/
 
-.schedule-table{ width: 90%; margin: 0 5%;}
-.schedule-table thead tr th{ font-weight: bold; width: 25%;}
+.schedule-table{ width: 90%; margin: 0 5%; border: 1px solid #29668b;}
+.schedule-table thead tr{ background-color: #29668b }
+.schedule-table thead tr th{ font-weight: bold; width: 25%; color: #fff;}
 .schedule-table tr td{ padding: 10px; text-align: center;}
 .schedule-table tr td.full-width{ width: 100%;}
 
 
 /*newsticker style*/
 #tips-title{ color: #000; font-size: 12px; font-weight: bold; margin: 0 40px 5px;}
-#slidenews{ color: #000; font-size: 12px; margin: 0 40px; padding: 0; }
-#slidenews li{ list-style-type: none; height: 70px;}
+
 
 
 #select-4-button{ padding: 12px 0; margin: 0 0 .6em 0; 
@@ -719,7 +719,9 @@ font-style: italic;
 #select-5-button, #select-6-button, #select-7-button{ background: none !important;}
 
 
-#slidenews{ background: #F8F0DB; border-radius: 5px; margin-bottom: 5px; padding: 0 5px;}
+
+#slidenews{ color: #000; font-size: 12px; margin: 10px; padding: 0; background: #F8F0DB; border-radius: 5px;}
+#slidenews li{ list-style-type: none; height: 70px;}
 
 /*graph styling*/
 .jqplot-title{ margin-bottom: 7px;}
