@@ -686,8 +686,8 @@ font-style: italic;
 
 .schedule-table{ width: 90%; margin: 0 5%; border: 1px solid #29668b;}
 .schedule-table thead tr{ background-color: #29668b }
-.schedule-table thead tr th{ font-weight: bold; width: 25%; color: #fff;}
-.schedule-table tr td{ padding: 10px; text-align: center;}
+.schedule-table thead tr th{ font-weight: bold; width: 25%; padding-left: 10px; color: #fff; text-align: left;}
+.schedule-table tr td{ padding: 10px; text-align: left;}
 .schedule-table tr td.full-width{ width: 100%;}
 
 
