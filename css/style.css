@@ -720,7 +720,7 @@ font-style: italic;
 
 
 
-#slidenews{ color: #000; font-size: 12px; margin: 10px; padding: 0; background: #F8F0DB; border-radius: 5px;}
+#slidenews{ color: #000; font-size: 12px; margin: 10px; padding: 0 10px; background: #F8F0DB; border-radius: 5px;}
 #slidenews li{ list-style-type: none; height: 70px;}
 
 /*graph styling*/
