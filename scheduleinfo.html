@@ -68,38 +68,40 @@
     	 var res2 = item.schedule_date.split("-");
     	 dateValue2 = res2[2]+" "+whichMonth(item.schedule_date);
 
-    	 if(item.prev_date){
-    	 	if(item.place){
-    	 		if(item.prev_time){
-    	 			$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time+'has been changed to '+dateValue2+'  '+item.schedule_time+' at '+item.place);
-    	 		}
-    	 		else{
-    	 			$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2+' at '+item.place);
-    	 		}
-    	 	}
-    	 	else if(item.prev_time){
-    	 		$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time+'has been changed to '+dateValue2+'  '+item.schedule_time);
-    	 	}
-    	 	else{
-    	 		$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2);
-    	 	}
-    	 }
+    	 // if(item.prev_date){
+    	 // 	if(item.place){
+    	 // 		if(item.prev_time){
+    	 // 			$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time+'has been changed to '+dateValue2+'  '+item.schedule_time+' at '+item.place);
+    	 // 		}
+    	 // 		else{
+    	 // 			$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2+' at '+item.place);
+    	 // 		}
+    	 // 	}
+    	 // 	else if(item.prev_time){
+    	 // 		$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time+'has been changed to '+dateValue2+'  '+item.schedule_time);
+    	 // 	}
+    	 // 	else{
+    	 // 		$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2);
+    	 // 	}
+    	 // }
 
-		 // if(item.prev_date && !item.place && !item.prev_time){
-		 // 	$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2);
-		 // }
 
-		 // else if(item.prev_date && item.place && !item.prev_time){
-		 // 	$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2+' at '+item.place);
-		 // }
 
-		 // else if(item.prev_date && item.prev_time && !item.place){
-		 // 	$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time+'has been changed to '+dateValue2+'  '+item.schedule_time);
-		 // }
+		 if(!item.place && !item.prev_time){
+		 	$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2);
+		 }
 
-		 // else if(item.prev_date && item.prev_time && item.place){
-		 // 	$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time+'has been changed to '+dateValue2+'  '+item.schedule_time+' at '+item.place);
-		 // }
+		 else if(item.place && !item.prev_time){
+		 	$("#resultAdd").html('The training of '+dateValue1+' has been changed to '+dateValue2+' at '+item.place);
+		 }
+
+		 else if(item.prev_time && !item.place){
+		 	$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time.substr(0, 5)+' has been changed to '+dateValue2+'  '+item.schedule_time.substr(0, 5));
+		 }
+
+		 else{
+		 	$("#resultAdd").html('The training of '+dateValue1+' '+item.prev_time.substr(0, 5)+' has been changed to '+dateValue2+'  '+item.schedule_time.substr(0, 5)+' at '+item.place);
+		 }
 		
 		}
 
