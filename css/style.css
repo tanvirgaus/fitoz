@@ -678,9 +678,11 @@ font-style: italic;
 	text-align: left; font-size: 20px; float: left;}
 .newslink:hover{ background-color: #cf3c43;}
 
-#news_details{width: 92%; padding: 10px 2%; margin: 1px 4%; background-color: #29668b; border: none; color: #fff; 
-	text-align: left; font-size: 20px; float: left;}
-#news_details h2{ color: #000;}
+#news_details{width: 92%; padding: 1%; margin: 1px 4%; background-color: #29668b; border: none; color: #fff; 
+	text-align: left; font-size: 14px; float: left;}
+#news_details h2{ color: #fff; font-weight: bold;}
+.news_content{ background-color: #000; padding: 5px;}
+.news_content a{}
 
 /*schedule listing*/
 
@@ -689,6 +691,8 @@ font-style: italic;
 .schedule-table thead tr th{ font-weight: bold; width: 25%; padding-left: 10px; color: #fff; text-align: left;}
 .schedule-table tr td{ padding: 10px; text-align: left;}
 .schedule-table tr td.full-width{ width: 100%;}
+
+.schedule-table tbody tr.odd{ background: #fafafa; color: #000;}
 
 
 /*newsticker style*/
@@ -720,11 +724,14 @@ font-style: italic;
 
 
 
-#slidenews{ color: #000; font-size: 12px; margin: 10px; padding: 0 10px; background: #F8F0DB; border-radius: 5px;}
-#slidenews li{ list-style-type: none; height: 70px;}
+#slidenews{ color: #000; font-size: 12px; margin: 10px; background: #F8F0DB; border-radius: 5px;}
+ul.newsticker{ padding: 10px !important; }
+#slidenews li{ list-style-type: none; height: 70px; }
 
 /*graph styling*/
 .jqplot-title{ margin-bottom: 7px;}
 
 .jqplot-xaxis{ margin: 5px 0 0 0; color: #fff !important;}
 canvas.jqplot-xaxis-tick{ color: #fff !important;}
+
+

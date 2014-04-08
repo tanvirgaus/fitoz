@@ -112,6 +112,9 @@
                     if(txt != ""){
                         $("#resultAdd").html(txt);
                     }
+
+                     $(".schedule-table > tbody > tr:odd").addClass("odd");
+    				 $(".schedule-table > tbody > tr:not(.odd)").addClass("even");
                 }
                 
 

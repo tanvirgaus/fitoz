@@ -63,7 +63,7 @@
     
                 var txt = "";
                 
-                txt += "<h2>"+item.title+"</h2>"+"<p>"+item.content+"</p>"+'<a href="'+item.url+'">'+item.url+'</a>';
+                txt += "<h2>"+item.title+"</h2>"+"<div class='news_content'><p>"+item.content+"</p>"+'<a href="'+item.url+'">'+item.url+'</a></div>';
                  
                     if(txt != ""){
                         $("#news_details").html(txt);
