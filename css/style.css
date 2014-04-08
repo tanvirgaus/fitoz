@@ -729,9 +729,11 @@ ul.newsticker{ padding: 10px !important; }
 #slidenews li{ list-style-type: none; height: 70px; }
 
 /*graph styling*/
-.jqplot-title{ margin-bottom: 7px;}
+/*.jqplot-title{ margin-bottom: 7px;}*/
 
 .jqplot-xaxis{ margin: 5px 0 0 0; color: #fff !important;}
 canvas.jqplot-xaxis-tick{ color: #fff !important;}
+
+#title_unit{ text-align: center;}
 
 

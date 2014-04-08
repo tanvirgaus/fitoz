@@ -63,7 +63,7 @@
                 if(len > 0){
                     for(var i=0;i<len;i++){
                     	var val = item[i].Assessment;
-                            txt += "<li>"+'<form class="userAssessmentForm" action="details.html" data-ajax="false" method="GET">'+'<input type="hidden" name="'+val.name+'" class="deleteId" value="'+val.id+'">'+'<input type="submit" class="submitFormAssessment" value="'+val.name+'">'+'</form>'+"</li>";
+                            txt += "<li>"+'<form class="userAssessmentForm" action="details.html" data-ajax="false" method="GET">'+'<input type="hidden" name="'+val.name+'" class="deleteId" value="'+val.id+'">'+'<input type="hidden" name="unit" value="'+val.unit+'">'+'<input type="submit" class="submitFormAssessment" value="'+val.name+'">'+'</form>'+"</li>";
                        
                     }
                     if(txt != ""){
